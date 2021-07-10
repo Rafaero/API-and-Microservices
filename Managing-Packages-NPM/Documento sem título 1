@@ -1,0 +1,4 @@
+Gerenciando Pacotes com NPM
+npm (Node Package Manager), é uma ferramenta de linha de comando para instalar, criar e compartilhar pacotes de código JavaScript escritos para Node.js. Existem muitos pacotes de código aberto disponíveis no npm, portanto, antes de iniciar um projeto, reserve um tempo para explorá-los para não acabar recriando a roda para coisas como trabalhar com datas ou buscar dados de uma API.
+
+Neste curso, você aprenderá os fundamentos do uso do npm, incluindo como trabalhar com o package.jsone como gerenciar as dependências instaladas.

@@ -1,0 +1,8 @@
+Nó básico e expresso
+Node.js é um tempo de execução de JavaScript que permite aos desenvolvedores escrever programas de back-end (lado do servidor) em JavaScript. O Node.js vem com um punhado de módulos integrados - pequenos programas independentes - que ajudam nisso. Alguns dos módulos principais incluem HTTP, que atua como um servidor, e Sistema de Arquivos, um módulo para ler e modificar arquivos.
+
+No último conjunto de cursos, você aprendeu a instalar e gerenciar pacotes do npm, que são coleções de módulos menores. Esses pacotes podem ajudá-lo a construir aplicativos maiores e mais complexos.
+
+Express é uma estrutura leve de aplicativo da web e é um dos pacotes mais populares do npm. O Express torna muito mais fácil criar um servidor e lidar com o roteamento do roteamento para seu aplicativo, que lida com coisas como direcionar as pessoas para a página correta quando visitam um determinado endpoint, como/ blog.
+
+Neste curso, você aprenderá os fundamentos do Node e do Express, incluindo como criar um servidor, servir arquivos diferentes e lidar com diferentes solicitações do navegador.

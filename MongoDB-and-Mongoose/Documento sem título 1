@@ -1,0 +1,6 @@
+MongoDB e Mongoose
+MongoDB é um aplicativo de banco de dados que armazena documentos JSON (ou registros) que você pode usar em seu aplicativo. Ao contrário do SQL, outro tipo de banco de dados, o Mongo é um banco de dados não relacional ou "NoSQL". Isso significa que o Mongo armazena todos os dados associados em um registro, em vez de armazená-los em várias tabelas predefinidas como em um banco de dados SQL.
+
+Mongoose é um pacote npm popular que geralmente é instalado junto com o Mongo. Com o Mongoose, você pode usar objetos JavaScript simples em vez de JSON, o que torna mais fácil trabalhar com o Mongo. Além disso, ele permite que você crie projetos para seus documentos chamados de esquemas, para que você não salve acidentalmente o tipo errado de dados e cause bugs posteriormente.
+
+Nos cursos MongoDB e Mongoose, você aprenderá os fundamentos do trabalho com dados persistentes, incluindo como configurar um modelo e salvar, excluir e localizar documentos no banco de dados.

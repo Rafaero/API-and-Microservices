@@ -2,3 +2,36 @@ Gerenciando Pacotes com NPM
 npm (Node Package Manager), é uma ferramenta de linha de comando para instalar, criar e compartilhar pacotes de código JavaScript escritos para Node.js. Existem muitos pacotes de código aberto disponíveis no npm, portanto, antes de iniciar um projeto, reserve um tempo para explorá-los para não acabar recriando a roda para coisas como trabalhar com datas ou buscar dados de uma API.
 
 Neste curso, você aprenderá os fundamentos do uso do npm, incluindo como trabalhar com o package.jsone como gerenciar as dependências instaladas.
+
+**O `package.json`arquivo é o centro de qualquer projeto Node.js ou pacote npm. Ele armazena informações sobre seu projeto, semelhante a como a seção <head> de um documento HTML descreve o conteúdo de uma página da web. Consiste em um único objeto JSON onde as informações são armazenadas em pares chave-valor. Existem apenas dois campos obrigatórios; "nome" e "versão", mas é uma boa prática fornecer informações adicionais sobre seu projeto que possam ser úteis para futuros usuários ou mantenedores.**
+
+**Se você olhar a árvore de arquivos do seu projeto, encontrará o arquivo package.json no nível superior da árvore. Este é o arquivo que você aprimorará nos próximos desafios.**
+
+**Uma das informações mais comuns neste arquivo é o `author`campo. Ele especifica quem criou o projeto e pode consistir em uma string ou um objeto com contato ou outros detalhes. Um objeto é recomendado para projetos maiores, mas uma string simples como o exemplo a seguir servirá para este projeto.**
+
+```
+"author": "Jane Doe",
+
+```
+
+---
+
+**Adicione seu nome como o `author`do projeto no arquivo package.json.**
+
+**Observação: lembre - se de que você está escrevendo JSON, portanto, todos os nomes de campo devem usar aspas duplas (") e ser separados por vírgula (,).**
+
+{
+	"name": "fcc-learn-npm-package-json",
+	"dependencies": {
+		"express": "^4.14.0"
+	},
+	"main": "server.js",
+	"scripts": {
+		"start": "node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://idontknow/todo.git"
+	},
+	"author": "Rafael Paiva"
+}

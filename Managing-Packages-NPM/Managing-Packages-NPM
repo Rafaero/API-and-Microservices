@@ -1,7 +1,6 @@
-Gerenciando Pacotes com NPM
-npm (Node Package Manager), é uma ferramenta de linha de comando para instalar, criar e compartilhar pacotes de código JavaScript escritos para Node.js. Existem muitos pacotes de código aberto disponíveis no npm, portanto, antes de iniciar um projeto, reserve um tempo para explorá-los para não acabar recriando a roda para coisas como trabalhar com datas ou buscar dados de uma API.
+**npm (Node Package Manager), é uma ferramenta de linha de comando para instalar, criar e compartilhar pacotes de código JavaScript escritos para Node.js. Existem muitos pacotes de código aberto disponíveis no npm, portanto, antes de iniciar um projeto, reserve um tempo para explorá-los para não acabar recriando a roda para coisas como trabalhar com datas ou buscar dados de uma API.**
 
-Neste curso, você aprenderá os fundamentos do uso do npm, incluindo como trabalhar com o package.jsone como gerenciar as dependências instaladas.
+**Neste curso, você aprenderá os fundamentos do uso do npm, incluindo como trabalhar com o package.json e como gerenciar as dependências instaladas.**
 
 **O `package.json`arquivo é o centro de qualquer projeto Node.js ou pacote npm. Ele armazena informações sobre seu projeto, semelhante a como a seção <head> de um documento HTML descreve o conteúdo de uma página da web. Consiste em um único objeto JSON onde as informações são armazenadas em pares chave-valor. Existem apenas dois campos obrigatórios; "nome" e "versão", mas é uma boa prática fornecer informações adicionais sobre seu projeto que possam ser úteis para futuros usuários ou mantenedores.**
 
@@ -21,17 +20,571 @@ Neste curso, você aprenderá os fundamentos do uso do npm, incluindo como traba
 **Observação: lembre - se de que você está escrevendo JSON, portanto, todos os nomes de campo devem usar aspas duplas (") e ser separados por vírgula (,).**
 
 {
-	"name": "fcc-learn-npm-package-json",
-	"dependencies": {
-		"express": "^4.14.0"
-	},
-	"main": "server.js",
-	"scripts": {
-		"start": "node server.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://idontknow/todo.git"
-	},
-	"author": "Rafael Paiva"
+"name": "fcc-learn-npm-package-json",
+"dependencies": {
+"express": "^4.14.0"
+},
+"main": "server.js",
+"scripts": {
+"start": "node server.js"
+},
+"repository": {
+"type": "git",
+"url": "[https://idontknow/todo.git](https://idontknow/todo.git)"
+},
+"author": "Rafael Paiva"
+}
+
+**Adicione uma descrição ao seu package.json**
+
+**A próxima parte de um bom arquivo package.json é o `description`campo; onde uma descrição curta, mas informativa sobre seu projeto pertence.**
+
+**Se algum dia você planeja publicar um pacote para o npm, esta é a string que deve vender sua ideia ao usuário quando ele decidir se vai instalar o pacote ou não. No entanto, esse não é o único caso de uso para a descrição, é uma ótima maneira de resumir o que um projeto faz. É tão importante em qualquer projeto Node.js ajudar outros desenvolvedores, futuros mantenedores ou até mesmo o seu futuro a entender o projeto rapidamente.**
+
+**Independentemente do que você planeja para o seu projeto, uma descrição é definitivamente recomendada. Aqui está um exemplo:**
+
+```
+"description": "A project that does something awesome",
+
+```
+
+---
+
+**Adicione um `description`ao arquivo package.json do seu projeto.**
+
+**Nota: Lembre-se de usar aspas duplas para nomes de campo (") e vírgulas (,) para separar campos.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp"
+
+}
+
+**Adicione palavras-chave ao seu package.json**
+
+**O `keywords`campo é onde você pode descrever seu projeto usando palavras-chave relacionadas. Aqui está um exemplo:**
+
+```
+"keywords": [ "descriptive", "related", "words" ],
+
+```
+
+**Como você pode ver, este campo é estruturado como uma matriz de strings entre aspas.**
+
+---
+
+**Adicione uma matriz de strings adequadas ao `keywords`campo no arquivo package.json do seu projeto.**
+
+**Uma das palavras-chave deve ser "freecodecamp".**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+]
+
+}
+
+**Adicione uma licença ao seu package.json**
+
+**O `license`campo é onde você informa aos usuários o que eles têm permissão para fazer com o seu projeto.**
+
+**Algumas licenças comuns para projetos de código aberto incluem MIT e BSD. As informações da licença não são necessárias e as leis de direitos autorais na maioria dos países darão a você a propriedade do que você criar por padrão. No entanto, é sempre uma boa prática declarar explicitamente o que os usuários podem e não podem fazer. Aqui está um exemplo do campo de licença:**
+
+```
+"license": "MIT",
+
+```
+
+---
+
+**Preencha o `license`campo no arquivo package.json do seu projeto conforme achar adequado.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT"
+
+}
+
+**Adicione uma versão ao seu package.json**
+
+**A `version`é um dos campos obrigatórios de seu arquivo package.json. Este campo descreve a versão atual do seu projeto. Aqui está um exemplo:**
+
+```
+"version": "1.2.0",
+
+```
+
+---
+
+**Adicione um `version`ao arquivo package.json do seu projeto.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
+}
+
+**Expanda Seu Projeto com Pacotes Externos de npm**
+
+**Uma das maiores razões para usar um gerenciador de pacotes é seu poderoso gerenciamento de dependências. Em vez de ter que certificar-se manualmente de obter todas as dependências sempre que configurar um projeto em um novo computador, o npm instala tudo automaticamente para você. Mas como o npm pode saber exatamente o que o seu projeto precisa? Conheça a `dependencies`seção do seu arquivo package.json.**
+
+**Nesta seção, os pacotes que seu projeto requer são armazenados usando o seguinte formato:**
+
+```
+"dependencies": {
+  "package-name": "version",
+  "express": "4.14.0"
+}
+```
+
+---
+
+**Adicione a versão "2.14.0" do pacote "moment" ao `dependencies`campo do seu arquivo package.json.**
+
+**Nota: Moment é uma biblioteca útil para trabalhar com horas e datas.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0",
+
+"moment": "2.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
+}
+
+**Gerenciar dependências de npm compreendendo o controle de versão semântico**
+
+`**Versions`dos pacotes npm na seção de dependências de seu arquivo package.json seguem o que é chamado Semantic Versioning (SemVer), um padrão da indústria para versionamento de software que visa facilitar o gerenciamento de dependências. Bibliotecas, frameworks ou outras ferramentas publicadas no npm devem usar o SemVer para comunicar claramente que tipo de mudanças os projetos podem esperar caso sejam atualizados.**
+
+**Conhecer o SemVer pode ser útil ao desenvolver software que usa dependências externas (o que você quase sempre faz). Um dia, a compreensão desses números o salvará de introduzir acidentalmente alterações importantes em seu projeto sem entender por que coisas que funcionaram ontem de repente não funcionam hoje. É assim que o Versionamento Semântico funciona de acordo com o site oficial:**
+
+```
+"package": "MAJOR.MINOR.PATCH"
+
+```
+
+**A versão MAJOR deve incrementar quando você faz alterações de API incompatíveis. A versão MINOR deve ser incrementada quando você adiciona funcionalidade de maneira compatível com versões anteriores. A versão PATCH deve incrementar quando você faz correções de bug compatíveis com versões anteriores. Isso significa que os PATCHes são correções de bugs e os MINORs adicionam novos recursos, mas nenhum deles quebra o que funcionava antes. Finalmente, os MAJORs adicionam mudanças que não funcionam com as versões anteriores.**
+
+---
+
+**Na seção de dependências de seu arquivo package.json, altere o `version`de momento para corresponder à versão MAJOR 2, à versão 10 MINOR e à versão 2 do PATCH**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0",
+
+"moment": "2.10.2"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
+}
+
+**Use o caractere Til para sempre usar a versão de patch mais recente de uma dependência**
+
+**No último desafio, você disse ao npm para incluir apenas uma versão específica de um pacote. Essa é uma maneira útil de congelar suas dependências se você precisar garantir que diferentes partes do seu projeto permaneçam compatíveis entre si. Mas, na maioria dos casos de uso, você não quer perder as correções de bugs, pois muitas vezes incluem patches de segurança importantes e (com sorte) não interrompem as coisas ao fazer isso.**
+
+**Para permitir que uma dependência npm seja atualizada para a versão PATCH mais recente, você pode prefixar a versão da dependência com o `~`caractere til ( ). Aqui está um exemplo de como permitir atualizações para qualquer versão 1.3.x.**
+
+```
+"package": "~1.3.8"
+
+```
+
+---
+
+**No arquivo package.json, sua regra atual sobre como o npm pode atualizar o momento é usar uma versão específica (2.10.2). Mas agora, você deseja permitir a versão 2.10.x mais recente.**
+
+**Use o `~`caractere til ( ) para prefixar a versão do momento em suas dependências e permitir que o npm atualize para qualquer nova versão do PATCH.**
+
+**Nota: Os números da versão em si não devem ser alterados.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0",
+
+"moment": "~2.10.2"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
+}
+
+**Use o Caret-Character para usar a versão secundária mais recente de uma dependência**
+
+**Semelhante a como o til que aprendemos no último desafio permite que o npm instale o PATCH mais recente para uma dependência, o acento circunflexo ( `^`) permite que o npm instale atualizações futuras também. A diferença é que o acento circunflexo permitirá tanto atualizações MENORES quanto PATCHes.**
+
+**Sua versão atual do momento deve ser "~ 2.10.2", o que permite que o npm seja instalado na versão 2.10.x mais recente. Se você fosse usar o acento circunflexo (^) como um prefixo de versão, o npm teria permissão para atualizar para qualquer versão 2.xx.**
+
+```
+"package": "^1.3.8"
+
+```
+
+**Isso permitiria atualizações para qualquer versão 1.xx do pacote.**
+
+---
+
+**Use o acento circunflexo ( `^`) para prefixar a versão do momento em suas dependências e permitir que o npm atualize para qualquer nova versão MINOR.**
+
+**Nota: Os números da versão em si não devem ser alterados.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0",
+
+"moment": "^2.10.2"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
+}
+
+**Remova um pacote de suas dependências**
+
+**Agora você testou algumas maneiras de gerenciar dependências de seu projeto usando a seção de dependências do package.json. Você também incluiu pacotes externos, adicionando-os ao arquivo e até mesmo dizendo ao npm quais tipos de versões você deseja, usando caracteres especiais como o til ou o circunflexo.**
+
+**Mas e se você quiser remover um pacote externo de que não precisa mais? Você já deve ter adivinhado, apenas remova o par de valores-chave correspondente para esse pacote de suas dependências.**
+
+**Este mesmo método se aplica à remoção de outros campos em seu package.json também**
+
+---
+
+**Remova o pacote moment de suas dependências.**
+
+**Observação: certifique-se de ter a quantidade certa de vírgulas depois de removê-lo.**
+
+{
+
+"name": "fcc-learn-npm-package-json",
+
+"dependencies": {
+
+"express": "^4.14.0"
+
+},
+
+"main": "server.js",
+
+"scripts": {
+
+"start": "node server.js"
+
+},
+
+"repository": {
+
+"type": "git",
+
+"url": "https://idontknow/todo.git"
+
+},
+
+"author": "Rafael Paiva",
+
+"description": "Treinando gerenciamento de pacotes freecodecamp",
+
+"keywords": [
+
+"Treinando",
+
+"Package-Management",
+
+"freecodecamp"
+
+],
+
+"license": "MIT",
+
+"version": "1.2.1"
+
 }

@@ -1,0 +1,370 @@
+**Node.js é um tempo de execução de JavaScript que permite aos desenvolvedores escrever programas de back-end (lado do servidor) em JavaScript. O Node.js vem com um punhado de módulos integrados - pequenos programas independentes - que ajudam nisso. Alguns dos módulos principais incluem HTTP, que atua como um servidor, e Sistema de Arquivos, um módulo para ler e modificar arquivos.**
+
+**No último conjunto de cursos, você aprendeu a instalar e gerenciar pacotes do npm, que são coleções de módulos menores. Esses pacotes podem ajudá-lo a construir aplicativos maiores e mais complexos.**
+
+**Express é uma estrutura leve de aplicativo da web e é um dos pacotes mais populares do npm. O Express torna muito mais fácil criar um servidor e lidar com o roteamento do roteamento para seu aplicativo, que lida com coisas como direcionar as pessoas para a página correta quando visitam um determinado endpoint, como**
+
+```
+/ blog
+```
+
+.
+
+**Neste curso, você aprenderá os fundamentos do Node e do Express, incluindo como criar um servidor, servir arquivos diferentes e lidar com diferentes solicitações do navegador.**
+
+**Durante o processo de desenvolvimento, é importante poder verificar o que está acontecendo em seu código.**
+
+**O Node é apenas um ambiente JavaScript. Como o JavaScript do lado do cliente, você pode usar o console para exibir informações úteis de depuração. Em sua máquina local, você veria a saída do console em um terminal. No Replit, um terminal é aberto no painel direito por padrão.**
+
+**Recomendamos manter o terminal aberto enquanto trabalha com esses desafios. Ao ler a saída no terminal, você pode ver os erros que podem ocorrer.**
+
+---
+
+**Modifique o `myApp.js`arquivo para registrar "Hello World" no console.**
+
+var express = require('express');
+
+var app = express();
+
+console.log("Hello World");
+
+**Iniciar um servidor expresso funcional**
+
+**Nas primeiras duas linhas do arquivo `myApp.js`, você pode ver como é fácil criar um objeto de aplicativo Express. Este objeto possui vários métodos, e você aprenderá muitos deles nesses desafios. Um método fundamental é `app.listen(port)`. Diz ao seu servidor para escutar em uma determinada porta, colocando-a em estado de execução. Por motivos de teste, precisamos que o aplicativo seja executado em segundo plano, portanto, adicionamos esse método ao `server.js`arquivo para você.**
+
+**Vamos servir nossa primeira corda! Em Express, rotas leva a seguinte estrutura: `app.METHOD(PATH, HANDLER)`. METHOD é um método http em minúsculas. PATH é um caminho relativo no servidor (pode ser uma string ou mesmo uma expressão regular). HANDLER é uma função que o Express chama quando a rota é correspondida. Os manipuladores assumem a forma `function(req, res) {...}`, em que req é o objeto de solicitação e res é o objeto de resposta. Por exemplo, o manipulador**
+
+```
+function(req, res) {
+  res.send('Response String');
+}
+
+```
+
+**servirá a string 'String de resposta'.**
+
+---
+
+**Use o `app.get()`método para servir a string "Hello Express" para GET solicitações correspondentes ao `/`caminho (raiz). Certifique-se de que seu código funcione observando os logs e, em seguida, veja os resultados na visualização se estiver usando o Replit.**
+
+**Observação: todo o código para essas lições deve ser adicionado entre as poucas linhas de código com as quais você começou.**
+
+var express = require('express');
+
+var app = express();
+
+app.get("/", function(req, res) {
+
+res.send("Hello Express");
+
+})
+
+**Servir um arquivo HTML**
+
+**Você pode responder às solicitações com um arquivo usando o `res.sendFile(path)`método. Você pode colocá-lo dentro do `app.get('/', ...)`manipulador de rota. Nos bastidores, esse método definirá os cabeçalhos apropriados para instruir seu navegador sobre como lidar com o arquivo que deseja enviar, de acordo com seu tipo. Em seguida, ele lerá e enviará o arquivo. Este método precisa de um caminho de arquivo absoluto. Recomendamos que você use a variável global Node `__dirname`para calcular o caminho assim:**
+
+```
+absolutePath = __dirname + relativePath/file.ext
+
+```
+
+---
+
+**Envie o `/views/index.html`arquivo como uma resposta às solicitações GET para o `/`caminho. Se você visualizar seu aplicativo ao vivo, deverá ver um grande cabeçalho HTML (e um formulário que usaremos mais tarde ...), sem nenhum estilo aplicado.**
+
+**Observação: você pode editar a solução do desafio anterior ou criar um novo. Se você criar uma nova solução, lembre-se de que o Express avalia as rotas de cima para baixo e executa o manipulador para a primeira correspondência. Você precisa comentar a solução anterior ou o servidor continuará respondendo com uma string.**
+
+var express = require('express');
+
+var app = express();
+
+app.get("/", function(req, res) {
+
+res.sendFile(__dirname + '/views/index.html')
+
+})
+
+**Servir ativos estáticos**
+
+**Um servidor HTML geralmente possui um ou mais diretórios que podem ser acessados pelo usuário. Você pode colocar lá os ativos estáticos necessários ao seu aplicativo (folhas de estilo, scripts, imagens).**
+
+**No Express, você pode implementar essa funcionalidade usando o middleware `express.static(path)`, onde o `path`parâmetro é o caminho absoluto da pasta que contém os ativos.**
+
+**Se você não sabe o que é middleware ... não se preocupe, discutiremos em detalhes mais tarde. Basicamente, middleware são funções que interceptam manipuladores de rota, adicionando algum tipo de informação. Um middleware precisa ser montado usando o método `app.use(path, middlewareFunction)`. O primeiro `path`argumento é opcional. Se você não passar, o middleware será executado para todas as solicitações.**
+
+---
+
+**Monte o `express.static()`middleware no caminho `/public`com `app.use()`. O caminho absoluto para a pasta de ativos é `__dirname + /public`.**
+
+**Agora seu aplicativo deve ser capaz de servir uma folha de estilo CSS. Observe que o `/public/style.css`arquivo é referenciado no `/views/index.html`boilerplate do projeto. Sua primeira página deve estar um pouco melhor agora!**
+
+var express = require('express');
+
+var app = express();
+
+app.get("/", function(req, res) {
+
+res.sendFile(__dirname + '/views/index.html')
+
+})
+
+app.use('/public', express.static(__dirname + '/public'))
+
+**Servir JSON em uma rota específica**
+
+**Enquanto um servidor HTML fornece HTML, uma API fornece dados. Uma API *REST* (REpresentational State Transfer) permite a troca de dados de forma simples, sem a necessidade de o cliente saber nenhum detalhe do servidor. O cliente só precisa saber onde está o recurso (a URL) e a ação que deseja executar nele (o verbo). O verbo GET é usado quando você está buscando alguma informação, sem modificar nada. Atualmente, o formato de dados preferido para mover informações pela web é JSON. Simplificando, JSON é uma maneira conveniente de representar um objeto JavaScript como uma string, para que possa ser transmitido facilmente.**
+
+**Vamos criar uma API simples criando uma rota que responde com JSON no caminho `/json`. Você pode fazer como de costume, com o `app.get()`método. Dentro do gerenciador de rota, use o método `res.json()`, passando um objeto como argumento. Este método fecha o loop de solicitação-resposta, retornando os dados. Nos bastidores, ele converte um objeto JavaScript válido em uma string e, em seguida, define os cabeçalhos apropriados para informar ao navegador que você está servindo JSON e envia os dados de volta. Um objeto válido possui a estrutura usual `{key: data}`. `data`pode ser um número, uma string, um objeto aninhado ou uma matriz. `data`também pode ser uma variável ou o resultado de uma chamada de função, caso em que será avaliada antes de ser convertida em uma string.**
+
+---
+
+**Sirva o objeto `{"message": "Hello json"}`como uma resposta, em formato JSON, a solicitações GET para a `/json`rota. Em seguida, aponte seu navegador para `your-app-url/json`, você verá a mensagem na tela.**
+
+var express = require('express');
+
+var app = express();
+
+app.get("/json", function(req, res) {
+
+res.json({
+
+"message": "Hello json"
+
+})
+
+})
+
+app.use('/public', express.static(__dirname + '/public'))
+
+**Use o arquivo .env**
+
+**O `.env`arquivo é um arquivo oculto usado para passar variáveis de ambiente para seu aplicativo. Este arquivo é secreto, ninguém além de você pode acessá-lo e pode ser usado para armazenar dados que você deseja manter privados ou ocultos. Por exemplo, você pode armazenar chaves de API de serviços externos ou o URI de seu banco de dados. Você também pode usá-lo para armazenar opções de configuração. Ao definir as opções de configuração, você pode alterar o comportamento do seu aplicativo, sem a necessidade de reescrever algum código.**
+
+**As variáveis de ambiente podem ser acessadas no aplicativo como `process.env.VAR_NAME`. O `process.env`objeto é um objeto Node global e as variáveis são passadas como strings. Por convenção, os nomes das variáveis são todos maiúsculos, com palavras separadas por um sublinhado. O `.env`é um arquivo shell, portanto, você não precisa colocar nomes ou valores entre aspas. Também é importante notar que não pode haver espaço ao redor do sinal de igual quando você está atribuindo valores às suas variáveis, por exemplo `VAR_NAME=value`. Normalmente, você colocará cada definição de variável em uma linha separada.**
+
+---
+
+**Vamos adicionar uma variável de ambiente como opção de configuração.**
+
+**Crie um `.env`arquivo na raiz do diretório do seu projeto e armazene a variável `MESSAGE_STYLE=uppercase`nele.**
+
+**Em seguida, no `/json`manipulador de rota GET criado no último desafio, transforme a mensagem do objeto de resposta em maiúsculas se for `process.env.MESSAGE_STYLE`igual `uppercase`. O objeto de resposta deve ser `{"message": "Hello json"}`ou `{"message": "HELLO JSON"}`, dependendo do `MESSAGE_STYLE`valor.**
+
+**Nota: Se você estiver usando o Replit, não poderá criar um `.env`arquivo. Em vez disso, use a guia *SECRETS* embutida para adicionar a variável.**
+
+var express = require('express');
+
+var app = express();
+
+app.get("/json", function(req, res) {
+
+if(process.env.MESSAGE_STYLE === 'uppercase'){
+
+res.json({
+
+"message": "HELLO JSON"
+
+})
+
+}else{
+
+res.json({
+
+"message": "Hello json"
+
+})
+
+}
+
+const mySecret = process.env['MESSAGE_STYLE']
+
+})
+
+app.use('/public', express.static(__dirname + '/public'))
+
+**Implementar um middleware de log de solicitações de nível raiz**
+
+**Anteriormente, você foi apresentado à `express.static()`função de middleware. Agora é hora de ver o que é middleware, com mais detalhes. As funções de middleware são funções que aceitam 3 argumentos: o objeto de solicitação, o objeto de resposta e a próxima função no ciclo de solicitação-resposta do aplicativo. Essas funções executam alguns códigos que podem ter efeitos colaterais no aplicativo e geralmente adicionam informações aos objetos de solicitação ou resposta. Eles também podem encerrar o ciclo enviando uma resposta quando alguma condição for atendida. Se eles não enviarem a resposta quando terminarem, eles iniciarão a execução da próxima função na pilha. Isso aciona a chamada do terceiro argumento `next()`,.**
+
+**Veja o seguinte exemplo:**
+
+```
+function(req, res, next) {
+  console.log("I'm a middleware...");
+  next();
+}
+
+```
+
+**Vamos supor que você montou essa função em uma rota. Quando uma solicitação corresponde à rota, ele exibe a string “Eu sou um middleware…” e, em seguida, executa a próxima função na pilha. Neste exercício, você criará um middleware de nível raiz. Como você viu no desafio 4, para montar uma função de middleware no nível raiz, você pode usar o `app.use(<mware-function>)`método. Neste caso, a função será executada para todas as solicitações, mas você também pode definir condições mais específicas. Por exemplo, se quiser que uma função seja executada apenas para solicitações POST, você pode usar `app.post(<mware-function>)`. Existem métodos análogos para todos os verbos HTTP (GET, DELETE, PUT, ...).**
+
+---
+
+**Construa um logger simples. Para cada pedido, ele deve registrar para o console uma string com o seguinte formato: `method path - ip`. Um exemplo seria algo como isto: `GET /json - ::ffff:127.0.0.1`. Observe que há um espaço entre `method`e `path`e que o traço separando `path`e `ip`é circundado por um espaço em ambos os lados. Você pode obter o método de solicitação (verbo http), o caminho relativo da rota e o ip do chamador do objeto de solicitação usando `req.method`, `req.path`e `req.ip`. Lembre-se de ligar `next()`quando terminar, ou seu servidor ficará preso para sempre. Certifique-se de ter os 'Logs' abertos e veja o que acontece quando chega algum pedido.**
+
+**Observação: o Express avalia as funções na ordem em que aparecem no código. Isso também é válido para middleware. Se você quiser que funcione para todas as rotas, deve ser montado antes delas.**
+
+var express = require('express');
+
+var app = express();
+
+app.use("/json", function(req, res, next) {
+
+console.log(req.method+" "+req.path+" - "+req.ip)
+
+next()
+
+})
+
+**Cadeia de middleware para criar um servidor de hora**
+
+**O middleware pode ser montado em uma rota específica usando `app.METHOD(path, middlewareFunction)`. O middleware também pode ser encadeado dentro da definição de rota.**
+
+**Veja o seguinte exemplo:**
+
+```
+app.get('/user', function(req, res, next) {
+  req.user = getTheUserSync();  // Hypothetical synchronous operation
+  next();
+}, function(req, res) {
+  res.send(req.user);
+});
+
+```
+
+**Essa abordagem é útil para dividir as operações do servidor em unidades menores. Isso leva a uma melhor estrutura do aplicativo e a possibilidade de reutilizar o código em diferentes lugares. Essa abordagem também pode ser usada para realizar algumas validações nos dados. Em cada ponto da pilha de middleware, você pode bloquear a execução da cadeia atual e passar o controle para funções projetadas especificamente para lidar com erros. Ou você pode passar o controle para a próxima rota correspondente, para lidar com casos especiais. Veremos como na seção Express avançada.**
+
+---
+
+**Na rota, `app.get('/now', ...)`encadeie uma função de middleware e o manipulador final. Na função de middleware, você deve adicionar a hora atual ao objeto de solicitação na `req.time`chave. Você pode usar `new Date().toString()`. No manipulador, responda com um objeto JSON, pegando a estrutura `{time: req.time}`.**
+
+**Nota: O teste não será aprovado se você não encadear o middleware. Se você montar a função em outro lugar, o teste falhará, mesmo se o resultado de saída estiver correto.**
+
+var express = require('express');
+
+var app = express();
+
+app.get('/now',(req,res,next)=> {
+
+req.time = new Date().toString();
+
+next();
+
+}, (req,res)=> {
+
+res.json({'time':req.time});
+
+});
+
+**Obtenha entrada de parâmetro de rota do cliente**
+
+**Ao construir uma API, temos que permitir que os usuários nos comuniquem o que desejam obter de nosso serviço. Por exemplo, se o cliente está solicitando informações sobre um usuário armazenado no banco de dados, ele precisa de uma forma de nos informar em qual usuário está interessado. Uma forma possível de obter esse resultado é usando parâmetros de rota. Os parâmetros de rota são segmentos nomeados da URL, delimitados por barras (/). Cada segmento captura o valor da parte do URL que corresponde à sua posição. Os valores capturados podem ser encontrados no `req.params`objeto.**
+
+> route_path: '/ user /: userId / book /: bookId'actual_request_URL: '/ user / 546 / book / 6754'req.params: {userId: '546', bookId: '6754'}
+
+---
+
+**Construa um servidor de eco, montado na rota `GET /:word/echo`. Responda com um objeto JSON, pegando a estrutura `{echo: word}`. Você pode encontrar a palavra a ser repetida em `req.params.word`. Você pode testar sua rota na barra de endereços do navegador, visitando algumas rotas correspondentes, por exemplo `your-app-rootpath/freecodecamp/echo`.**
+
+var express = require('express');
+
+var app = express();
+
+app.get('/:word/echo', (req,res)=> {
+
+res.json({"echo": req.params.word});
+
+});
+
+**Obtenha a entrada do parâmetro de consulta do cliente**
+
+**Outra maneira comum de obter dados do cliente é codificar os dados após o caminho da rota, usando uma string de consulta. A string de consulta é delimitada por um ponto de interrogação (?) E inclui pares de campo = valor. Cada par é separado por um E comercial (&). O Express pode analisar os dados da string de consulta e preencher o objeto `req.query`. Alguns caracteres, como a porcentagem (%), não podem estar em URLs e precisam ser codificados em um formato diferente antes de serem enviados. Se você usar a API do JavaScript, poderá usar métodos específicos para codificar / decodificar esses caracteres.**
+
+> route_path: '/ library'actual_request_URL: '/ library? userId = 546 & bookId = 6754'req.query: {userId: '546', bookId: '6754'}
+
+---
+
+**Crie um endpoint de API, montado em `GET /name`. Responda com um documento JSON, pegando a estrutura `{ name: 'firstname lastname'}`. Os parâmetros de nome e sobrenome devem ser codificados em uma string de consulta, por exemplo `?first=firstname&last=lastname`.**
+
+**Nota: No exercício a seguir, você receberá dados de uma solicitação POST, no mesmo `/name`caminho de rota. Se quiser, você pode usar o método `app.route(path).get(handler).post(handler)`. Esta sintaxe permite encadear diferentes manipuladores de verbos na mesma rota de caminho. Você pode economizar um pouco de digitação e ter um código mais limpo.**
+
+var express = require('express');
+
+var app = express();
+
+app.get('/name', (req, res) => {
+
+let string = req.query.first+" "+req.query.last
+
+res.json({"name": string});
+
+});
+
+**Use body-parser para analisar solicitações POST**
+
+**Além de GET, existe outro verbo HTTP comum, é POST. POST é o método padrão usado para enviar dados do cliente com formulários HTML. Na convenção REST, POST é usado para enviar dados para criar novos itens no banco de dados (um novo usuário ou uma nova postagem de blog). Você não tem um banco de dados neste projeto, mas aprenderá como lidar com solicitações POST de qualquer maneira.**
+
+Nesse tipo de solicitação, os dados não aparecem na URL, mas ficam ocultos no corpo da solicitação. O corpo é uma parte da solicitação HTTP, também chamada de carga útil. Mesmo que os dados não sejam visíveis no URL, isso não significa que sejam privados. Para ver o motivo, observe o conteúdo bruto de uma solicitação HTTP POST:
+
+```
+POST /path/subpath HTTP/1.0
+From: john@example.com
+User-Agent: someBrowser/1.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 20
+
+name=John+Doe&age=25
+
+```
+
+**Como você pode ver, o corpo é codificado como a string de consulta. Este é o formato padrão usado por formulários HTML. Com Ajax, você também pode usar JSON para lidar com dados com uma estrutura mais complexa. Também existe outro tipo de codificação: multipart / form-data. Este é usado para fazer upload de arquivos binários. Neste exercício, você usará um corpo codificado por url. Para analisar os dados provenientes de solicitações POST, você deve instalar o `body-parser`pacote. Este pacote permite que você use uma série de middleware, que pode decodificar dados em diferentes formatos.**
+
+---
+
+**Instale o `body-parser`módulo em seu `package.json`. Em seguida, `require`no início do arquivo. Armazene-o em uma variável chamada `bodyParser`. O middleware para lidar com dados codificados por url é retornado por `bodyParser.urlencoded({extended: false})`. Passe para `app.use()`a função retornada pela chamada de método anterior. Como de costume, o middleware deve ser montado antes de todas as rotas que precisam dele.**
+
+**Nota: `extended=false` é uma opção de configuração que diz ao analisador para usar a codificação clássica. Ao usá-lo, os valores podem ser apenas strings ou matrizes. A versão estendida permite mais flexibilidade de dados, mas é superada por JSON.**
+
+var express = require('express');
+
+var bodyParser = require('body-parser');
+
+var app = express();
+
+app.use(bodyParser.urlencoded({extended : false}))
+
+**Obtenha dados de solicitações POST**
+
+**Monte um manipulador POST no caminho `/name`. É o mesmo caminho de antes. Preparamos um formulário na página inicial html. Ele enviará os mesmos dados do exercício 10 (Query string). Se o analisador de corpo estiver configurado corretamente, você deve encontrar os parâmetros no objeto `req.body`. Dê uma olhada no exemplo usual de biblioteca:**
+
+> rota: POST '/ library'urlencoded_body: userId = 546 & bookId = 6754req.body: {userId: '546', bookId: '6754'}
+
+**Responder com o mesmo objeto JSON como antes: `{name: 'firstname lastname'}`. Teste se seu endpoint funciona usando o formulário html que fornecemos na página inicial do aplicativo.**
+
+**Dica: Existem vários outros métodos http além de GET e POST. E por convenção há uma correspondência entre o verbo http e a operação que você vai executar no servidor. O mapeamento convencional é:**
+
+**POST (às vezes PUT) - Crie um novo recurso usando as informações enviadas com a solicitação,**
+
+**GET - Leia um recurso existente sem modificá-lo,**
+
+**PUT ou PATCH (às vezes POST) - Atualize um recurso usando os dados enviados,**
+
+**DELETE => Excluir um recurso.**
+
+**Existem também alguns outros métodos que são usados para negociar uma conexão com o servidor. Exceto pelo GET, todos os outros métodos listados acima podem ter uma carga útil (ou seja, os dados no corpo da solicitação). O middleware analisador de corpo também funciona com esses métodos.**
+
+var express = require('express');
+
+var bodyParser = require('body-parser');
+
+var app = express();
+
+app.post('/name', bodyParser.urlencoded({extended : false}),
+
+(request, response) => {
+
+let string = request.body.first+" "+request.body.last
+
+response.json({name: string})
+
+})
